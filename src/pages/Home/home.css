@@ -1,0 +1,35 @@
+.home-text{
+    color: #080477;
+ }
+
+ .cardBtn-color{
+    background: linear-gradient(169.84deg, #7D79F6 8.06%, #080477 92.4%);
+ }
+
+ .water-color{
+    background: radial-gradient(128.32% 128.32% at -0.65% -8.96%, #80E0FF 0%, #2F5DFD 100%)
+ }
+ .power-color{
+    background: radial-gradient(117.97% 117.97% at 0% -9.38%, #FFF282 0%, #FC7E24 100%) 
+ }
+ .wifi-1{
+    background: radial-gradient(117.14% 117.14% at -20.87% -30.78%, #E9FFAC 0%, #6B8FE9 100%)
+ }
+ .cable-color{
+    background: radial-gradient(117.14% 117.14% at -20.87% -30.78%, #FFEDED 0%, #E96B6B 100%)
+ }
+ .recharge-color{
+    background: radial-gradient(128.32% 128.32% at -0.65% -8.96%, #FFBDBD 0%, #FD2F2F 100%)
+ }
+
+ .health-color{
+    background: radial-gradient(117.97% 117.97% at 0% -9.38%, #FFC9FD 0%, #FC24F3 100%) 
+ }
+
+ .grocery-color{
+    background: radial-gradient(117.97% 117.97% at 0% -9.38%, #FFE270 0%, #0CA925 100%)
+ }
+
+ .wifi-2{
+    background: radial-gradient(117.14% 117.14% at -20.87% -30.78%, #EDFFFE 0%, #AA6BE9 100%)
+ }

@@ -1,0 +1,19 @@
+.landingpage-bg-color{
+    background: linear-gradient(180deg, #080477 0%, #4C31C3 87.5%);
+}
+
+.login-btn{
+
+  background-blend-mode: normal, screen;
+   backdrop-filter: blur(48.5863px);
+}
+
+.signup-btn{
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.177508), rgba(255, 255, 255, 0.177508));
+background-blend-mode: normal, screen;
+backdrop-filter: blur(48.5863px);
+}
+.input-color{
+   /* background-color:  #96A3B7; */
+   background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+}
