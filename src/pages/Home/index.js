@@ -36,6 +36,7 @@ export default function Home() {
                     text={action.text}
                     imgUrl={action.imgUrl}
                     color={action.color}
+                    linkUrl={action.linkUrl}
                      />
                    )
                   
@@ -59,6 +60,7 @@ export default function Home() {
                         text={tag.text}
                         imgUrl={tag.imgUrl}
                         color={tag.color}
+                        linkUrl={tag.linkUrl}
                          />
                     )
                    })
@@ -106,25 +108,29 @@ const Actions=[
     {
         text:"Send",
         imgUrl:send,
-        color:"cardBtn-color"
+        color:"cardBtn-color",
+        linkUrl:"send"
 
     },
     {
         text:"Receive",
         imgUrl:recieve ,
-        color:"cardBtn-color"
+        color:"cardBtn-color",
+        linkUrl:"home"
 
     },
     {
         text:"Swap",
         imgUrl:swap ,
-        color:"cardBtn-color"
+        color:"cardBtn-color",
+        linkUrl:"home"
 
     },
     {
         text:"Scan",
         imgUrl:scan ,
-        color:"cardBtn-color"
+        color:"cardBtn-color",
+        linkUrl:"home"
 
     }
 
@@ -135,38 +141,44 @@ const Tags=[
     {
         text:"Water",
         imgUrl:water,
-        color:"water-color"
+        color:"water-color",
+        linkUrl:"home"
 
     },
     {
         text:"Power",
         imgUrl:power ,
-        color:"power-color"
+        color:"power-color",
+        linkUrl:"home"
 
     },
     {
         text:"Wi-Fi",
         imgUrl:wifi ,
-        color:"wifi-1"
+        color:"wifi-1",
+        linkUrl:"home"
 
     },
     {
         text:"Cable",
         imgUrl:cable ,
-        color:"cable-color"
+        color:"cable-color",
+        linkUrl:"home"
 
     },
     {
         text:"Recharge",
         imgUrl:cable ,
-        color:"recharge-color"
+        color:"recharge-color",
+        linkUrl:"home"
 
     },
 
     {
         text:"Health",
         imgUrl:health ,
-        color:"health-color"
+        color:"health-color",
+        linkUrl:"home"
 
     },
 
@@ -174,14 +186,16 @@ const Tags=[
     {
         text:"Grocery",
         imgUrl:grocery ,
-        color:"grocery-color"
+        color:"grocery-color",
+        linkUrl:"home"
 
     },
 
     {
         text:"Wi-Fi",
         imgUrl:wifi ,
-        color:"wifi-2"
+        color:"wifi-2",
+        linkUrl:"home"
 
     },
 

@@ -5,7 +5,9 @@ export const web3State = atom({
     default: {},
   });
 
-  export const EthereumState = atom({
-    key: 'Eth',
+  export const currentUserState= atom({
+    key: 'user',
     default: {},
   });
+
+ 

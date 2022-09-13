@@ -3,10 +3,21 @@ import "../Home/home.css"
 import {AiOutlineCamera} from "react-icons/ai"
 import Scanner from '../../components/Scanner'
 import Layout from '../../Layout/layout'
+import QrReader from 'react-qr-scanner'
+import { MdTurnedIn } from 'react-icons/md'
 
 export default function Payment() {
     const [cameraAccess,setAccess]=useState(false)
     const [scanned,setScanned] =useState(false)
+    const [data, setData] = useState('No Wallet Address');
+    const [delay,setDelay] =useState(100)
+    const handleScan=(data)=>setData(data)
+   const  handleScanError=(err)=>console.error(err)
+    
+    
+
+   console.log(data,"datatar")
+
   return (
     <Layout>
     <div className='pt-24'>
@@ -16,26 +27,37 @@ export default function Payment() {
         </div>
         
         <div className='pt-20 px-8 flex flex-col items-center space-y-2'>
-           {scanned===true?
+           {scanned===false?
              <>
              <Scanner >
-              {cameraAccess===false?(
+              {cameraAccess===false&&(
                <div className='bg-slate-300 flex flex-col items-center justify-center h-64 m-6 space-y-3'>
                    <AiOutlineCamera className='text-white text-2xl'/>
                   <p className='text-white px-4'>Kryptpay requires access to your camera</p>
                   
                   <main className='flex items-center space-x-5'>
-                    <button className='rounded-full border border-blue-900 py-3 px-6  text-sm text-white'>Deny</button>
-                    <button className='rounded-full bg-blue-900 py-3 px-6  text-sm text-white '>Allow</button>
+                    <button className='rounded-full border border-blue-900 py-3 px-6  text-sm text-white' >Deny</button>
+                    <button className='rounded-full bg-blue-900 py-3 px-6  text-sm text-white ' onClick={()=>setAccess(true)}>Allow</button>
                   </main>
 
                  </div>
-              )
-                   :
+                 
+              )}
+                   {cameraAccess===true&&(
                    <div className='h-64 m-4'>
+                       <QrReader
+                           delay= {delay}
+                          //  style={previewStyle}
+                          onError={handleScanError}
+                         onScan={handleScan}
+                         className="h-64 w-full"
 
-                   </div>
-                    }
+                        />
+                        <h5 className='text-base text-center w-full home-text'>{data}</h5>
+                        {data===null&& <h5 className='text-base text-center w-full home-text'>No Wallet Address</h5>}
+                       
+                       </div>
+                    )}
                 </Scanner>
                 
                 {cameraAccess===true&& 

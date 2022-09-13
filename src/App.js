@@ -1,27 +1,48 @@
 
 import { useEffect,useState } from "react";
 import {useRecoilState} from "recoil"
-import {web3State,EthereumState} from "./RecoilState/globalState"
+import {currentUserState} from "./RecoilState/globalState"
 import {Routes,Route,BrowserRouter as Router } from "react-router-dom"
 import './App.css';
 import Home from "./pages/Home";
 import Layout from "./Layout/layout";
 import Payment from "./pages/Payment";
-import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
-import Web3 from 'web3'
-import Web3Modal from "web3modal";
-
+import { onAuthStateChanged } from "firebase/auth"
+import {auth} from "./firebase"
+import LogIn from "./pages/LogIn";
 import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
 import Send from "./pages/SendPage";
-
-
+import Methods from "./pages/paymentmethod";
+import Settings from "./pages/Settings";
+import Portfolio from "./pages/Portfolio"
 function App() {
-  const [web3Instance,setWeb3]=useRecoilState(web3State)
-  const [account,setAccount] =useState("")
-  
-   
  
+  const [currentUser,setcurrentUser] =useRecoilState(currentUserState)
+  const [authUser,setUsers]=useState([])
+ 
+
+//   let authListner=null
+//   useEffect( ()=>{
+  
+//     authListner=onAuthStateChanged(auth,(user)=>{
+//         if (user !== null) {
+//             const uid = user.uid;
+//             //const {displayName,email,uid}=user
+//          //   console.log(displayName)
+
+//             const userRef =doc(db,"users", uid)
+//             console.log(userRef)
+//            getDoc(userRef).then(res=> {
+//             setcurrentUser(res.data())
+//             setUsers([res.data()])
+//           })
+//         }
+//         })
+//    return(
+//        authListner()
+//    )
+// },[])
 
   
   return (
@@ -31,9 +52,13 @@ function App() {
             {/**public route */}
             <Route exact path="/"  element={<LandingPage />} />
             <Route exact path="/signup"  element={<SignUp />} />
+            <Route exact path="/login"  element={<LogIn />} />
              <Route exact path="/home"  element={<Home />} />
              <Route exact path="/send"  element={<Send />} />
+             <Route exact path="/method/:id"  element={<Methods />} />
              <Route exact path="/payment"  element={<Payment />} />
+             <Route exact path="/settings"  element={<Settings />} />
+             <Route exact path="/portfolio"  element={<Portfolio />} />
          </Routes>
      
       

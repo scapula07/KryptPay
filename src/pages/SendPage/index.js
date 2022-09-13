@@ -8,6 +8,7 @@ import usdt from "../../assests/usdt.png"
 import bnb from "../../assests/bnb.png"
 import bit from "../../assests/bit.png"
 import aave from "../../assests/aave.png"
+import {Link} from "react-router-dom"
 
 export default function Send() {
   return (
@@ -33,6 +34,11 @@ export default function Send() {
             <div className='border border-slate-400 py-2 px-6 shadow-lg rounded-lg'>
                  <h5 className='text-slate-500'>Common bases</h5>
                 <div className='grid grid-flow-row grid-cols-3 gap-x-6 gap-y-2 py-4'>
+                    <Link to="/method/bnbandklv"
+                       state={{
+                        token:"bnb"
+                    }}
+                    >
                    <main  className='flex items-center space-x-1'>
                     <div className='bg-yellow-500 rounded-full p-1'>
                       <img src={bnb} />
@@ -40,6 +46,13 @@ export default function Send() {
                     
                      <h5 className='font-semibold'>BNB</h5>
                    </main>
+                   </Link>
+                   <Link
+                     to="/method/usdtandklv" 
+                     state={{
+                      token:"usdt"
+                  }}
+                   >
                    <main  className='flex items-center space-x-1'>
                     <div className='bg-green-500 rounded-full p-0.5'>
                       <img src={ usdt} />
@@ -47,6 +60,13 @@ export default function Send() {
                     
                      <h5 className='font-semibold'>USDT</h5>
                    </main>
+                   </Link>
+                   <Link
+                      to="/method/ethandklv" 
+                      state={{
+                       token:"eth"
+                   }}
+                     >
                    <main  className='flex items-center space-x-1'>
                     <div className='bg-slate-300 rounded-full p-1'>
                       <FaEthereum />
@@ -54,6 +74,13 @@ export default function Send() {
                     
                      <h5 className='font-semibold'>ETH</h5>
                    </main>
+                   </Link>
+                   <Link
+                      to="/method/btcandklv"
+                      state={{
+                       token:"btc"
+                   }}
+                     >
                    <main  className='flex items-center space-x-1'>
                     <div className='bg-yellow-500 rounded-full p-1'>
                       <BsCurrencyBitcoin className='text-white'/>
@@ -61,6 +88,13 @@ export default function Send() {
                     
                      <h5 className='font-semibold'>BTC</h5>
                    </main>
+                   </Link>
+                   <Link
+                      to="/method/bfgandklv"
+                      state={{
+                       token:"bfg"
+                   }}
+                      >
                    <main  className='flex items-center space-x-1'>
                     <div className='bg-blue-500 rounded-full p-1'>
                     <img src={bit} />
@@ -68,6 +102,13 @@ export default function Send() {
                     
                      <h5 className='font-semibold'>BFG</h5>
                    </main>
+                   </Link>
+                   <Link
+                       to="/method/aaveandklv"
+                       state={{
+                        token:"aave"
+                    }}
+                     >
                    <main  className='flex items-center space-x-1'>
                     <div className='bg-green-500 rounded-full p-1'>
                     <img src={ aave } />
@@ -75,6 +116,7 @@ export default function Send() {
                     
                      <h5 className='font-semibold'>AAVE</h5>
                    </main>
+                   </Link>
 
                 </div>
 
