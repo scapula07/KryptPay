@@ -10,4 +10,10 @@ export const web3State = atom({
     default: {},
   });
 
+  export const WalletAccountState= atom({
+    key: 'Account',
+    default: "",
+  });
+
+
  

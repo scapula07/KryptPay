@@ -1,11 +1,31 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import Layout from '../../Layout/layout'
 import {TbSend,TbArrowBarToDown} from "react-icons/tb"
 import {GrFormAdd} from "react-icons/gr"
 import logo from "../../assests/mainlogo.png"
 import logo2 from "../../assests/logo2.png"
+import {KLVTokencontract} from "../../kryptPayContractInstances"
+import { useRecoilValue } from 'recoil'
+import { WalletAccountState } from '../../RecoilState/globalState'
+import {coinbaseWallet ,ethereum ,web3 } from "../../coinbaseInitialization"
 
 export default function Portfolio() {
+  const walletAccount =useRecoilValue(WalletAccountState)
+  console.log(walletAccount,"port")
+  const [Balance,setBalance]=useState("0.0")
+  useEffect(()=>{
+    if(window.ethereum){
+    const getBalance=async()=>{
+       const balance = await KLVTokencontract.methods.balanceOf(walletAccount).call()
+       console.log(balance,"balalalalla")
+       setBalance(Number(web3.utils.fromWei(balance, "ether")))
+     }
+
+     getBalance()
+   }
+  },[])
+//    
+
   return (
     <Layout>
          <div  className='pt-10'>
@@ -17,7 +37,7 @@ export default function Portfolio() {
                 <main className='flex flex-col bg-slate-300 h-20 px-6  py-4 space-y-2 pb-2 rounded-2xl'>
                     <h5 className='text-sm home-text font-semibold'>Wallet Balance</h5>
                     <div className='flex items-center justify-between'>
-                      <h5 className='text-xl home-text font-semibold'>{"$1,200.00"}</h5>
+                      <h5 className='text-xl home-text font-semibold'>{Balance} <span className='text-sm'>KLV</span></h5>
                        <main className='flex items-center space-x-4'>
                          <h5 className='bg-white rounded-lg'><TbSend className='home-text text-3xl'/></h5>
                          <h5 className='bg-white rounded-lg'><TbArrowBarToDown className='home-text text-3xl '/></h5>

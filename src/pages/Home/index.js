@@ -116,14 +116,14 @@ const Actions=[
         text:"Receive",
         imgUrl:recieve ,
         color:"cardBtn-color",
-        linkUrl:"home"
+        linkUrl:"receive"
 
     },
     {
-        text:"Swap",
+        text:"Exchange",
         imgUrl:swap ,
         color:"cardBtn-color",
-        linkUrl:"home"
+        linkUrl:"exchange/purchase"
 
     },
     {

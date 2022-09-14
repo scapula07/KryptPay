@@ -14,3 +14,4 @@ export const coinbaseWallet = new CoinbaseWalletSDK({
 })
 export const ethereum = coinbaseWallet.makeWeb3Provider(DEFAULT_ETH_JSONRPC_URL, DEFAULT_CHAIN_ID)
 export const web3 = new Web3(ethereum)
+

@@ -7,16 +7,18 @@ import { query, where } from "firebase/firestore";
 import {coinbaseWallet ,ethereum ,web3 } from "../../coinbaseInitialization"
 import {storeFiles,retrieveFile} from "../../web3StorageInvoice"
 import {db} from "../../firebase"
+import { WalletAccountState} from "../../RecoilState/globalState"
+import { useRecoilValue } from 'recoil';
+import {KLVAppcontract} from "../../kryptPayContractInstances"
+
 export default function Methods() {
   const [proceed,setProceed] =useState(false)
   const [email,setEmail]=useState("")
   const [amount,setAmount]=useState("")
   const [receiver,setReceiver]=useState({})
+  const walletAccount =useRecoilValue( WalletAccountState)
 
-//   const Contract = new web3.eth.Contract(
-//     bot,
-//     "0x3E7Cee87CD88b39e415dE10161167F4dF453f13a"
-// )
+
 
   const findEmail=async()=>{
     console.log("searching")
@@ -31,23 +33,38 @@ export default function Methods() {
     })
   }
 
-  const continueTx=async()=>{
+  const sendTx=async()=>{
     console.log("storing")
-    const payload={
-        transactionHash:"0x02034568",
-        amount:"1000 klv",
-        to:"bartholomewonogwu@yahoo.com",
-        from:"johnOnogwu@yahoo.com"
-    }
-  try{
-    const cid = await storeFiles(payload,"john")
-    console.log(cid,"cid")
-    retrieveFile(cid)
-  }catch(e){
-    console.log(e)
-  }
+    const _to=receiver.address
+    const _amount=web3.utils.toWei(amount,'ether')
+    console.log(_to,_amount.at,"to n amount")
+    try{
+      const res =await  KLVAppcontract.methods.transfer(_to,_amount).send({from:walletAccount})
+      console.log(res,res.transactionHash)
+      const payload={
+        transactionHash:res.transactionHash,
+        amount:amount,
+        to:receiver.email,
+        from:email,
+        date:new Date()
+      }
+       const cid = await storeFiles(payload,"john")
+       console.log(cid,"cid")
+       retrieveFile(cid)
+
+
+
+     // toast.success("Bot started, Frontrunning uniswap.This might take a while!");
+    }catch(e){
+      console.log(e)
+     // toast.error("Something went wrong!");
+      }
+ 
+   }
+
    
-  }
+  
+  
   
   return (
       <Layout>
@@ -133,7 +150,7 @@ export default function Methods() {
                            <div className='flex  justify-between items-center w-full'>
                              <main className='flex flex-col'>
                               <h5 className='text-slate-400'>Address</h5>
-                              <h5 className='border-t-2 border-slate-300 home-text'>{email?.slice(0,9)+"..."}</h5>
+                              <h5 className='border-t-2 border-slate-300 home-text'>{receiver.email?.slice(0,9)+"..."}</h5>
 
                                </main>
                                <main>
@@ -143,7 +160,7 @@ export default function Methods() {
                                
                             </main>
                             <button className='bg-blue-900 w-full text-white py-1 rounded-lg '
-                            onClick={continueTx}
+                            onClick={sendTx}
                             >Continue</button>
                       </div> 
 

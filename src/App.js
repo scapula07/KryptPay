@@ -16,6 +16,10 @@ import Send from "./pages/SendPage";
 import Methods from "./pages/paymentmethod";
 import Settings from "./pages/Settings";
 import Portfolio from "./pages/Portfolio"
+import Exchange from "./pages/Exchange";
+import Purchase from "./pages/Exchange/purchase";
+import Swap from "./pages/Exchange/swap";
+import Receive from "./pages/ReceivePage";
 function App() {
  
   const [currentUser,setcurrentUser] =useRecoilState(currentUserState)
@@ -59,6 +63,11 @@ function App() {
              <Route exact path="/payment"  element={<Payment />} />
              <Route exact path="/settings"  element={<Settings />} />
              <Route exact path="/portfolio"  element={<Portfolio />} />
+             <Route exact path="/exchange"  element={<Exchange />} >
+             <Route exact path="purchase"  element={<Purchase />} />
+             <Route exact path="swap"  element={<Swap />} />
+            </Route>
+            <Route exact path="receive"  element={<Receive />} />
          </Routes>
      
       
