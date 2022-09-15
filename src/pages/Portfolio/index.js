@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil'
 import { WalletAccountState} from "../../RecoilState/globalState"
 import { currentUserState} from "../../RecoilState/globalState"
 import {coinbaseWallet ,ethereum ,web3 } from "../../coinbaseInitialization"
+import {Link} from "react-router-dom"
 
 export default function Portfolio() {
   const walletAccount =useRecoilValue(WalletAccountState)

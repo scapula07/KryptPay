@@ -13,6 +13,7 @@ import { currentUserState} from "../../RecoilState/globalState"
 import {GrFormAdd} from "react-icons/gr"
 import { collection, doc,deleteDoc, updateDoc,addDoc } from 'firebase/firestore'
 import {db} from "../../firebase"
+import {Link} from "react-router-dom"
 
 
 export default function Settings() {
@@ -78,7 +79,7 @@ export default function Settings() {
                         </main>
 
                         <main>
-                           <FaAngleRight className="text-xl home-text" />
+                          <Link to="/transactions"><FaAngleRight className="text-xl home-text" /></Link> 
                         </main>
                       
                         

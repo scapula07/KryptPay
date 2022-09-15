@@ -12,7 +12,7 @@ import {auth} from "./firebase"
 import LogIn from "./pages/LogIn";
 import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
-import Send from "./pages/SendPage";
+import Tokens from "./pages/Tokens";
 import Methods from "./pages/paymentmethod";
 import Settings from "./pages/Settings";
 import Portfolio from "./pages/Portfolio"
@@ -22,7 +22,7 @@ import Swap from "./pages/Exchange/swap";
 import Receive from "./pages/ReceivePage";
 import { doc,getDoc}  from "firebase/firestore";
 import {db} from "./firebase"
-
+import TransactionHistory from "./pages/TransactionHistory";
 
 function App() {
  
@@ -64,7 +64,7 @@ function App() {
             <Route exact path="/signup"  element={<SignUp />} />
             <Route exact path="/login"  element={<LogIn />} />
              <Route exact path="/home"  element={<Home />} />
-             <Route exact path="/send"  element={<Send />} />
+             <Route exact path="/tokens"  element={<Tokens />} />
              <Route exact path="/method/:id"  element={<Methods />} />
              <Route exact path="/payment"  element={<Payment />} />
              <Route exact path="/settings"  element={<Settings />} />
@@ -74,6 +74,7 @@ function App() {
              <Route exact path="swap"  element={<Swap />} />
             </Route>
             <Route exact path="receive"  element={<Receive />} />
+            <Route exact path="transactions"  element={<TransactionHistory />} />
          </Routes>
      
       

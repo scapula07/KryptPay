@@ -64,7 +64,7 @@ export default function Purchase() {
    }
   return (
     <div className=''> 
-    <div className='flex flex-col items-center space-y-6 bg-slate-300 h-80 rounded-lg w-80 px-4 py-4'>
+    <div className='flex flex-col items-center space-y-6 bg-slate-300 min-h-min rounded-lg w-80 px-4 py-4'>
       {txHash.length===0&&
       <>
        <main className='flex flex-col'>
@@ -125,7 +125,7 @@ export default function Purchase() {
        >Purchase KLV</button>
        </>
       }
-       {txHash.length  >1&&
+       {txHash.length >1&&
          <>
            <TransactionDetails payload={txPayload} cid={cid} closeTx={closeTx}/>
          </>

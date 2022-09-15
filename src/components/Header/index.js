@@ -13,7 +13,7 @@ export default function Header() {
   const walletAccount=useRecoilValue(WalletAccountState)
   return (
     <div className='w-full fixed bg-white'>
-            {window.location.href ==="http://localhost:3000/home"? 
+            {window.location.href ==="https://krypt-pay.vercel.app/home"? 
 
         <div className='flex items-center  justify-between  w-full'>
             <main className='flex space-x-2 items-center '>

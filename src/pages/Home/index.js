@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import "./home.css"
 import CardButton from '../../components/CardButton'
 import swap from "../../assests/swap.png"
@@ -15,15 +15,42 @@ import grocery from "../../assests/grocery.png"
 import {GoKebabVertical} from "react-icons/go"
 import Transactions from '../../components/Transactions'
 import {AiOutlineWifi} from "react-icons/ai"
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue,useRecoilState } from 'recoil';
+import { onAuthStateChanged } from "firebase/auth"
 import {HiOutlineShoppingCart} from "react-icons/hi"
 import Layout from '../../Layout/layout'
 import { WalletAccountState} from "../../RecoilState/globalState"
 import { currentUserState} from "../../RecoilState/globalState"
+import { doc,getDoc}  from "firebase/firestore";
+import {db,auth} from "../../firebase"
 
 export default function Home() {
-    const currentUser=useRecoilValue( currentUserState)
+    const [currentUser,setcurrentUser] =useRecoilState(currentUserState)
     const walletAccount=useRecoilValue(WalletAccountState)
+ 
+
+  let authListner=null
+  useEffect( ()=>{
+  
+    authListner=onAuthStateChanged(auth,(user)=>{
+        if (user !== null) {
+            const uid = user.uid;
+            //const {displayName,email,uid}=user
+         //   console.log(displayName)
+
+            const userRef =doc(db,"users", uid)
+            console.log(userRef)
+           getDoc(userRef).then(res=> {
+            setcurrentUser({...res.data(),id:user.uid})
+           
+          })
+        }
+        })
+   return(
+       authListner()
+   )
+},[])
+    
 
   return (
     <Layout >
@@ -115,7 +142,7 @@ const Actions=[
         text:"Send",
         imgUrl:send,
         color:"cardBtn-color",
-        linkUrl:"send"
+        linkUrl:"tokens"
 
     },
     {

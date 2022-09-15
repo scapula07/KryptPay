@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState,useEffect}from 'react'
 import Layout from '../../Layout/layout'
 import {RiArrowDropDownLine} from "react-icons/ri"
 import {FiSearch,FiArrowDown} from "react-icons/fi"
@@ -9,14 +9,38 @@ import bnb from "../../assests/bnb.png"
 import mainlogo from "../../assests/mainlogo.png"
 import aave from "../../assests/aave.png"
 import {Link} from "react-router-dom"
+import Fuse from "fuse.js"
+import { collection, onSnapshot, doc } from 'firebase/firestore'
+import { db } from "../../firebase"
 
-export default function Send() {
+
+export default function Tokens() {
+        const [Tokens,setToken]=useState([])
+        const [query,setQuery]=useState("")
+
+        useEffect(() => {
+          const fetch = async () => {
+              onSnapshot(collection(db, "tokens"), (snapshot) => {
+                setToken(snapshot.docs.map((doc) => {
+                      console.log(doc.data())
+                      return { ...doc.data(), id: doc.id }
+                  }))
+              });
+            }
+          fetch()
+      }, [])
+      const fuse =new Fuse(Tokens,{
+        keys:["name","symbol"]
+      })
+      const result=fuse.search(query)
+      console.log(result)
+
   return (
     <Layout >
         <div className='pt-14'>
            <div>
          
-            <h5 className='text-xl home-text font-semibold'>Send</h5>
+            <h5 className='text-xl home-text font-semibold'>Tokems</h5>
           </div>
           <div className="flex items-center w-full space-x-4 py-4 ">
              <RiArrowDropDownLine className='text-3xl text-slate-800' />
@@ -25,6 +49,7 @@ export default function Send() {
                 <input 
                 className='h-full  bg-slate-200 text-slate-700 outline-none border-0'
                 placeholder='Search token'
+                onChange={(e)=>setQuery(e.target.value)}
                 />
               </main>
             </div>
@@ -130,8 +155,32 @@ export default function Send() {
                     <h5 className='text-lg font-semibold'>Token name</h5>
                     <FiArrowDown className='text-lg font-semibold' />
                 </main>
-            </div>
-          
+
+                {result.length>1&&
+                 <div className='flex flex-col space-y-4 px-4 py-4'>
+                  {
+                    result.splice(0,8).map((res)=>{
+                      console.log(res.name,res.symbol)
+                      return(
+                        <Link to={`/method/${res.item.symbol}`}  >
+                           <main className="flex space-x-2 items-center ">
+                           <img src={res.item.imgUrl} className="h-6 w-6 rounded-full"/>
+                           <span className='font-semibold' >{res.item.symbol}</span>
+                         
+                           </main>
+                              
+                            
+                        
+                        </Link>
+                      )
+                    })
+                  }
+                  
+                </div>
+
+                  }
+                  </div>
+                
 
         </div>
     </Layout>
