@@ -1,21 +1,20 @@
-# Getting Started with Create React App
+# KryptPay - Multi-utility payment app
 
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ A cross-border payment gataway built on ethereum chain.
 
-## Available Scripts
+## Table of contents
+1. Project Description
+1. Technologies
+1. Installation and setup
+1. Usage 
 
-In the project directory, you can run:
 
-### `npm start`
+###  Project Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
+ KryptPay is a payment gataway for everyday utilities. 
+ It enables users to make easy and cheap crypto payment in the native token of our Dapp, KLV
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\

@@ -7,7 +7,7 @@ export default function Exchange() {
   return (
     <Layout >
       <div>
-           <div  className='pt-10'>
+           <div  className='pt-14'>
              <h5 className='text-xl home-text font-semibold'>Exchange</h5>
            </div>
             

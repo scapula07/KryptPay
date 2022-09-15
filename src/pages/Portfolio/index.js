@@ -6,7 +6,8 @@ import logo from "../../assests/mainlogo.png"
 import logo2 from "../../assests/logo2.png"
 import {KLVTokencontract} from "../../kryptPayContractInstances"
 import { useRecoilValue } from 'recoil'
-import { WalletAccountState } from '../../RecoilState/globalState'
+import { WalletAccountState} from "../../RecoilState/globalState"
+import { currentUserState} from "../../RecoilState/globalState"
 import {coinbaseWallet ,ethereum ,web3 } from "../../coinbaseInitialization"
 
 export default function Portfolio() {
@@ -28,7 +29,7 @@ export default function Portfolio() {
 
   return (
     <Layout>
-         <div  className='pt-10'>
+         <div  className='pt-14'>
            <div>
               <h5 className='text-xl home-text font-semibold'>Portfolio</h5>
            </div>

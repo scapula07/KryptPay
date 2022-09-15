@@ -6,14 +6,14 @@ import {FaEthereum} from "react-icons/fa"
 import {BsCurrencyBitcoin} from "react-icons/bs"
 import usdt from "../../assests/usdt.png"
 import bnb from "../../assests/bnb.png"
-import bit from "../../assests/bit.png"
+import mainlogo from "../../assests/mainlogo.png"
 import aave from "../../assests/aave.png"
 import {Link} from "react-router-dom"
 
 export default function Send() {
   return (
     <Layout >
-        <div className='pt-10'>
+        <div className='pt-14'>
            <div>
          
             <h5 className='text-xl home-text font-semibold'>Send</h5>
@@ -34,7 +34,7 @@ export default function Send() {
             <div className='border border-slate-400 py-2 px-6 shadow-lg rounded-lg'>
                  <h5 className='text-slate-500'>Common bases</h5>
                 <div className='grid grid-flow-row grid-cols-3 gap-x-6 gap-y-2 py-4'>
-                    <Link to="/method/bnbandklv"
+                    <Link to="/method/bnb"
                        state={{
                         token:"bnb"
                     }}
@@ -48,7 +48,7 @@ export default function Send() {
                    </main>
                    </Link>
                    <Link
-                     to="/method/usdtandklv" 
+                     to="/method/usdt" 
                      state={{
                       token:"usdt"
                   }}
@@ -62,7 +62,7 @@ export default function Send() {
                    </main>
                    </Link>
                    <Link
-                      to="/method/ethandklv" 
+                      to="/method/eth" 
                       state={{
                        token:"eth"
                    }}
@@ -76,7 +76,7 @@ export default function Send() {
                    </main>
                    </Link>
                    <Link
-                      to="/method/btcandklv"
+                      to="/method/btc"
                       state={{
                        token:"btc"
                    }}
@@ -90,21 +90,21 @@ export default function Send() {
                    </main>
                    </Link>
                    <Link
-                      to="/method/bfgandklv"
+                      to="/method/klv"
                       state={{
-                       token:"bfg"
+                       token:"klv"
                    }}
                       >
                    <main  className='flex items-center space-x-1'>
-                    <div className='bg-blue-500 rounded-full p-1'>
-                    <img src={bit} />
+                    <div className='bg-slate-200 rounded-full p-1'>
+                    <img src={mainlogo } className="h-4 w-4"/>
                     </div>
                     
-                     <h5 className='font-semibold'>BFG</h5>
+                     <h5 className='font-semibold'>KLV</h5>
                    </main>
                    </Link>
                    <Link
-                       to="/method/aaveandklv"
+                       to="/method/aave"
                        state={{
                         token:"aave"
                     }}

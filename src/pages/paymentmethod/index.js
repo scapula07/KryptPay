@@ -17,7 +17,13 @@ export default function Methods() {
   const [amount,setAmount]=useState("")
   const [receiver,setReceiver]=useState({})
   const walletAccount =useRecoilValue( WalletAccountState)
+  const [txHash,setHash] =useState("")
+  const [cid,setCid]=useState("")
+  const [txPayload,setPayload]=useState({})
 
+  const closeTx=()=>{
+    setHash("")
+            }
 
 
   const findEmail=async()=>{
@@ -41,14 +47,18 @@ export default function Methods() {
     try{
       const res =await  KLVAppcontract.methods.transfer(_to,_amount).send({from:walletAccount})
       console.log(res,res.transactionHash)
+      setHash(res.transactionHash)
       const payload={
         transactionHash:res.transactionHash,
         amount:amount,
-        to:receiver.email,
-        from:email,
+        recipientEmail:receiver.email,
+        senderEmail:email,
+        event:"Transfer",
         date:new Date()
       }
-       const cid = await storeFiles(payload,"john")
+      setPayload(payload)
+       const cid = await storeFiles(payload,email)
+       setCid(cid)
        console.log(cid,"cid")
        retrieveFile(cid)
 
@@ -68,12 +78,12 @@ export default function Methods() {
   
   return (
       <Layout>
-        <div className='pt-10'>
+        <div className='pt-14'>
            <div>
              <h5 className='text-xl home-text font-semibold'>{proceed===false?<>Methods</>:<>Confirm payment</>}</h5>
            </div>
             
-            <>
+            <> 
             {proceed===false?
                <div className='flex flex-col items-center justify-center pt-20 space-y-4'>
                <main>
@@ -137,6 +147,9 @@ export default function Methods() {
 
                </div>
                :
+               <>
+               {txHash.length===0&&
+                
                <div className='flex flex-col items-center space-y-10 pt-20'>
                      <main className='flex flex-col items-cennter space-y-0.5'>
                         <h5 className='px-6 home-text'>Amount</h5>
@@ -165,6 +178,11 @@ export default function Methods() {
                       </div> 
 
                   </div>
+                     }
+                     <>
+                       {txHash.length  >1&& <TransactionDetails payload={txPayload} cid={cid} closeTx={closeTx}/>}
+                     </>
+                     </>
                }
                </>
 

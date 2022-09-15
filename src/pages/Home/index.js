@@ -15,10 +15,16 @@ import grocery from "../../assests/grocery.png"
 import {GoKebabVertical} from "react-icons/go"
 import Transactions from '../../components/Transactions'
 import {AiOutlineWifi} from "react-icons/ai"
+import { useRecoilValue } from 'recoil';
 import {HiOutlineShoppingCart} from "react-icons/hi"
 import Layout from '../../Layout/layout'
+import { WalletAccountState} from "../../RecoilState/globalState"
+import { currentUserState} from "../../RecoilState/globalState"
 
 export default function Home() {
+    const currentUser=useRecoilValue( currentUserState)
+    const walletAccount=useRecoilValue(WalletAccountState)
+
   return (
     <Layout >
     <div className='pt-16'>

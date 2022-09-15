@@ -7,12 +7,46 @@ import {MdOutlineEdit,MdOutlineDeleteOutline,MdOutlineToggleOff,MdOutlinePrivacy
 import txImg from "../../assests/tx.png"
 import {RiShieldCheckLine} from "react-icons/ri"
 import {HiOutlineCurrencyDollar,HiOutlineMoon,HiOutlineFaceSmile} from "react-icons/hi"
+import { useRecoilValue } from 'recoil'
+import { WalletAccountState} from "../../RecoilState/globalState"
+import { currentUserState} from "../../RecoilState/globalState"
+import {GrFormAdd} from "react-icons/gr"
+import { collection, doc,deleteDoc, updateDoc,addDoc } from 'firebase/firestore'
+import {db} from "../../firebase"
+
 
 export default function Settings() {
+   
+   const currentUser=useRecoilValue( currentUserState)
+   const walletAccount=useRecoilValue(WalletAccountState)
+
+   const AddPreferredAccount=async()=>{
+
+      try{
+         const docRef = doc(db, "users", currentUserState.id);
+         await updateDoc(docRef, {
+             address:walletAccount
+           });
+     }catch(e){
+         console.log(e)
+     }
+
+   }
+
+   const DeletePreferredAccount=async()=>{
+         try{
+         const docRef = doc(db, "users", currentUserState.id);
+         await updateDoc(docRef, {
+             address:null
+           });
+     }catch(e){
+         console.log(e)
+     }
+   }
   return (
     <Layout>
         <div>
-           <div className='pt-10'>
+           <div className='pt-14'>
              <h5 className='text-xl home-text font-semibold'>Account</h5>
            </div>
 
@@ -23,16 +57,16 @@ export default function Settings() {
                     <div className='flex items-center space-x-4'>
                       <BsWallet2 className='home-text text-xl font-semibold'/>
                        <h5 className='flex flex-col -space-y-1'>
-                        <span className='text-base home-text'>{"0xf033663783993"}</span>
+                        <span className='text-base home-text'>{currentUser.address?.slice(0,9)}</span>
                         <span className='text-sm font-semibold home-text' >Preferred Address </span>
                         </h5>
                     </div>
                      <div className='flex space-x-3'>
                         <h5 className='rounded-lg bg-slate-300 p-1 '>
-                        <MdOutlineEdit className='text-lg home-text'/>
+                        <GrFormAdd className='text-lg home-text' onClick={AddPreferredAccount}/>
                         </h5>
                         <h5 className='rounded-lg bg-slate-300  p-1'>
-                        <MdOutlineDeleteOutline className='text-lg home-text'/>
+                        <MdOutlineDeleteOutline className='text-lg home-text' onClick={()=>{DeletePreferredAccount}}/>
                         </h5>
                      </div>
                  </main>

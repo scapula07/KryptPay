@@ -20,33 +20,39 @@ import Exchange from "./pages/Exchange";
 import Purchase from "./pages/Exchange/purchase";
 import Swap from "./pages/Exchange/swap";
 import Receive from "./pages/ReceivePage";
+import { doc,getDoc}  from "firebase/firestore";
+import {db} from "./firebase"
+
+
 function App() {
  
   const [currentUser,setcurrentUser] =useRecoilState(currentUserState)
   const [authUser,setUsers]=useState([])
  
 
-//   let authListner=null
-//   useEffect( ()=>{
+  let authListner=null
+  useEffect( ()=>{
   
-//     authListner=onAuthStateChanged(auth,(user)=>{
-//         if (user !== null) {
-//             const uid = user.uid;
-//             //const {displayName,email,uid}=user
-//          //   console.log(displayName)
+    authListner=onAuthStateChanged(auth,(user)=>{
+        if (user !== null) {
+            const uid = user.uid;
+            //const {displayName,email,uid}=user
+         //   console.log(displayName)
 
-//             const userRef =doc(db,"users", uid)
-//             console.log(userRef)
-//            getDoc(userRef).then(res=> {
-//             setcurrentUser(res.data())
-//             setUsers([res.data()])
-//           })
-//         }
-//         })
-//    return(
-//        authListner()
-//    )
-// },[])
+            const userRef =doc(db,"users", uid)
+            console.log(userRef)
+           getDoc(userRef).then(res=> {
+            setcurrentUser({...res.data(),id:user.uid})
+            setUsers([res.data()])
+          })
+        }
+        })
+   return(
+       authListner()
+   )
+},[])
+
+  console.log(currentUser)
 
   
   return (
