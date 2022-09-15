@@ -9,6 +9,8 @@ import {coinbaseWallet ,ethereum ,web3 } from "../../coinbaseInitialization"
 import {storeFiles,retrieveFile} from "../../web3StorageInvoice"
 import TransactionDetails from '../../components/TransactionDetails'
 import { currentUserState} from "../../RecoilState/globalState"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Purchase() {
@@ -32,6 +34,7 @@ export default function Purchase() {
      
      const purchaseTx=async()=>{
       console.log("purchasing")
+      if(walletAccount.length===0) return toast.error("Connect to wallet");
       
       const _amount=web3.utils.toWei(ethAmount,'ether')
       console.log( _amount)
@@ -39,7 +42,9 @@ export default function Purchase() {
       try{
       const res =await  KLVAppcontract.methods.purchaseTokens().send({from:walletAccount,value:_amount})
       console.log(res,res.transactionHash)
+
       setHash(res.transactionHash)
+      toast.success("Purchase Successful!");
       const payload={
          transactionHash:res.transactionHash,
          amount:klvAmount,
@@ -58,7 +63,7 @@ export default function Purchase() {
       // toast.success("Bot started, Frontrunning uniswap.This might take a while!");
       }catch(e){
       console.log(e)
-      // toast.error("Something went wrong!");
+       toast.error("Something went wrong!");
       }
    
    }

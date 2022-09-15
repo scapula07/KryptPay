@@ -10,6 +10,8 @@ import {db} from "../../firebase"
 import { WalletAccountState} from "../../RecoilState/globalState"
 import { useRecoilValue } from 'recoil';
 import {KLVAppcontract} from "../../kryptPayContractInstances"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Methods() {
   const [proceed,setProceed] =useState(false)
@@ -41,6 +43,7 @@ export default function Methods() {
 
   const sendTx=async()=>{
     console.log("storing")
+    if(walletAccount.length===0) return toast.error("Connect to wallet");
     const _to=receiver.address
     const _amount=web3.utils.toWei(amount,'ether')
     console.log(_to,_amount.at,"to n amount")
@@ -48,6 +51,7 @@ export default function Methods() {
       const res =await  KLVAppcontract.methods.transfer(_to,_amount).send({from:walletAccount})
       console.log(res,res.transactionHash)
       setHash(res.transactionHash)
+      toast.success("Purchase Successful!");
       const payload={
         transactionHash:res.transactionHash,
         amount:amount,
@@ -67,7 +71,7 @@ export default function Methods() {
      // toast.success("Bot started, Frontrunning uniswap.This might take a while!");
     }catch(e){
       console.log(e)
-     // toast.error("Something went wrong!");
+      toast.error("Something went wrong!");
       }
  
    }

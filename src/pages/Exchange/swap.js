@@ -9,7 +9,8 @@ import {coinbaseWallet ,ethereum ,web3 } from "../../coinbaseInitialization"
 import {storeFiles,retrieveFile} from "../../web3StorageInvoice"
 import TransactionDetails from '../../components/TransactionDetails'
 import { currentUserState} from "../../RecoilState/globalState"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Swap() {
 
@@ -35,6 +36,7 @@ export default function Swap() {
 
             const swapTx=async()=>{
                console.log("starting swap")
+               if(walletAccount.length===0) return toast.error("Connect to wallet");
                
                const _amount=web3.utils.toWei(klvAmount,'ether')
                console.log(_amount,"to n amount")
@@ -42,6 +44,7 @@ export default function Swap() {
                const res =await  KLVAppcontract.methods.swapTokens(_amount).send({from:walletAccount})
                console.log(res,res.transactionHash)
                setHash(res.transactionHash)
+               toast.success("Purchase Successful!");
                const payload={
                   transactionHash:res.transactionHash,
                   amount:klvAmount,
@@ -57,10 +60,10 @@ export default function Swap() {
          
          
          
-               // toast.success("Bot started, Frontrunning uniswap.This might take a while!");
+             
                }catch(e){
                console.log(e)
-               // toast.error("Something went wrong!");
+               toast.error("Something went wrong!");
                }
             
             }
