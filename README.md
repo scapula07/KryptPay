@@ -56,6 +56,30 @@ KryptPay offers a cheaper and easy payment gateway to allow for payment of basic
 
 Utility providers such as water corps can simplyy integrate on KryptPay  or registered on kryptpay .This will allow easy reception of payments from end users or customers  all over the world.
 
+##NOTE
+ 
+ We were able to fix the challange of importing custom erc20 token into coinbase wallet,it the following code snippet
+ `
+    ethereum.request({
+              method: "wallet_watchAsset",
+              params: {
+                type: "ERC20",
+                options: {
+                  address: "0xE09Aa821C1480aE46364583563a500f1288f5E7D",
+                  symbol: "KLV",
+                  decimals: 18,
+                  image:
+                    "https://firebasestorage.googleapis.com/v0/b/kryptpay-f5b8a.appspot.com/o/mainlogo.png?alt=media&token=0ac99a8a-e9ba-4b80-ab69-16ff3af34f37",
+                },
+              },
+            })
+            .then(response => {
+              const result =
+              result ? onApproveWatchAsset() : onDenyWatchAsset()
+            })
+            .catch(err => onError(err.message));
+ `
+
 
 ## AUTHORS
 Henry Ezeh
